@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silverlab | Gastric Health & Immune Research</title>
+    <title>Silverlab | Gastric Health & Regulatory Research</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -17,7 +17,6 @@
             --t3: #FF6A14;
             --t4: #80286C;
             --t5: #48a23f;
-            --t6: #792b8b;
         }
 
         body {
@@ -58,6 +57,18 @@
             width: 200px;
             height: auto;
         }
+
+        .schedule-badge {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .s0-badge { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+        .s1-badge { background-color: var(--primary); color: white; }
     </style>
 </head>
 <body class="antialiased">
@@ -67,6 +78,7 @@
     - NO MERMAID JS OR SVG USED. 
     - ALL diagrams and icons are CSS/HTML based.
     - Chart.js renders to Canvas exclusively.
+    - Branding: Silverlab Official (#002D72, #97D700).
 -->
 
 <nav class="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
@@ -77,7 +89,7 @@
                  class="silverlab-logo">
         </div>
         <div class="hidden lg:flex gap-6 items-center">
-            <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Market Insight Portal</span>
+            <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Clinical Research Portal</span>
             <div class="h-6 w-px bg-slate-200"></div>
             <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" 
                target="_blank" 
@@ -88,55 +100,44 @@
     </div>
 </nav>
 
-<header class="brand-gradient text-white py-20 px-6 relative overflow-hidden">
+<header class="brand-gradient text-white py-16 px-6 relative overflow-hidden">
     <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                Driving <span class="text-[#97D700]">Gastric Immunity</span> Innovation
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+                Navigating <span class="text-[#97D700]">Stomach Immunity</span> & Regulation
             </h1>
-            <p class="text-lg text-slate-300 mb-8 max-w-xl">
-                Analyzing the strategic shift in the South African consumer market: moving from reactive symptom management to proactive stomach health fortification.
+            <p class="text-lg text-slate-300 mb-8 max-w-xl leading-relaxed">
+                A strategic analysis of the South African gastric market, distinguishing between open-shop (S0) accessibility and professional pharmacy (S1) interventions.
             </p>
             <div class="flex flex-wrap gap-4">
                 <div class="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
-                    <span class="block text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">Market Reach</span>
-                    <span class="text-2xl font-bold">18.4M Consumers</span>
+                    <span class="block text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">Total Market Value</span>
+                    <span class="text-2xl font-bold">ZAR 3.2B+</span>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
-                    <span class="block text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">Growth Trends</span>
-                    <span class="text-2xl font-bold">+28% YoY Vol.</span>
+                    <span class="block text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">S0/S1 Growth</span>
+                    <span class="text-2xl font-bold">+12% Annual</span>
                 </div>
             </div>
         </div>
         <div class="hidden md:block">
             <div class="card-glass border-none shadow-2xl bg-white/5 backdrop-blur-xl p-8">
                 <div class="flex items-center gap-4 mb-6">
-                    <div class="w-3 h-3 rounded-full bg-[#97D700] animate-pulse"></div>
-                    <span class="text-xs font-black tracking-widest text-[#97D700] uppercase">Strategic Sentiment Focus</span>
+                    <div class="w-2 h-2 rounded-full bg-[#97D700] animate-ping"></div>
+                    <span class="text-[10px] font-black tracking-widest text-[#97D700] uppercase">Retail Dynamics</span>
                 </div>
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between text-[11px] font-bold uppercase text-slate-300 mb-2">
-                            <span>Speed of Symptom Action</span>
-                            <span>88% Priority</span>
-                        </div>
-                        <div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                            <div class="h-full bg-[#97D700] w-[88%]"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-[11px] font-bold uppercase text-slate-300 mb-2">
-                            <span>Microbiome Protection</span>
-                            <span>62% Priority</span>
-                        </div>
-                        <div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                            <div class="h-full bg-[#00b2e3] w-[62%]"></div>
-                        </div>
-                    </div>
-                </div>
-                <p class="mt-8 text-xs text-slate-400 leading-relaxed italic">
-                    "South African consumers are increasingly seeking solutions that neutralize pathogens without compromising their natural gastric defenses."
+                <p class="text-sm text-slate-200 mb-6 font-medium">
+                    The gap between supermarket convenience and pharmacy expertise is closing as consumers prioritize proactive "Stomach Immunity."
                 </p>
+                <div class="space-y-4">
+                    <div class="h-1 w-full bg-white/10 rounded-full">
+                        <div class="h-full bg-[#97D700] w-[75%]"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] font-bold text-slate-400">
+                        <span>OPEN SHOP ACCESSIBILITY (S0)</span>
+                        <span>75% MARKET VOL.</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -144,24 +145,117 @@
 
 <main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
 
-    <!-- From Symptom Management to Immune Fortification -->
+    <!-- Section: S0 vs S1 Product Landscape (The Requested Replacement) -->
+    <section class="space-y-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-extrabold brand-text-primary mb-4">The S0 vs. S1 Gastric Landscape</h2>
+            <p class="text-slate-500 text-sm">Understanding the regulatory split in the South African retail market between front-shop supermarkets and behind-the-counter pharmacy aisles.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Food Poisoning Category -->
+            <div class="card-glass border-t-8 border-[#FF6A14]">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-3xl">🤢</span>
+                    <h3 class="text-xl font-extrabold brand-text-primary">Food Poisoning Management</h3>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="p-4 bg-slate-50 rounded-2xl">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="schedule-badge s0-badge">Schedule 0 (Open Shop)</span>
+                            <span class="text-[10px] font-bold text-slate-400">Retail Accessible</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#97D700] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Rehidrat:</strong> The legacy market leader for oral rehydration. Key for preventing dehydration during vomiting/diarrhea.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#97D700] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Activated Charcoal:</strong> A natural absorbent used to neutralize toxins in the digestive tract.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-[#002D72]/5 rounded-2xl border border-[#002D72]/10">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="schedule-badge s1-badge">Schedule 1 (Pharmacy Only)</span>
+                            <span class="text-[10px] font-bold text-[#002D72]">Expert Recommendation</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#002D72] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Tasectan (Gelatin Tannate):</strong> #1 doctor-prescribed diarrhea treatment. Forms a protective film against pathogen adhesion.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#002D72] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Smecta (Diosmectite):</strong> Natural clay-based binder for viruses and toxins. High pediatric demand.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stomach Flu Category -->
+            <div class="card-glass border-t-8 border-[#00b2e3]">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-3xl">🤒</span>
+                    <h3 class="text-xl font-extrabold brand-text-primary">Stomach Flu (Viral) Care</h3>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="p-4 bg-slate-50 rounded-2xl">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="schedule-badge s0-badge">Schedule 0 (Open Shop)</span>
+                            <span class="text-[10px] font-bold text-slate-400">Retail Accessible</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#97D700] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Buscopan:</strong> Frequently purchased to manage painful abdominal cramps associated with viral bugs.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#97D700] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Paracetamol:</strong> Standard first-line treatment for accompanying fever and body aches.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-[#002D72]/5 rounded-2xl border border-[#002D72]/10">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="schedule-badge s1-badge">Schedule 1 (Pharmacy Only)</span>
+                            <span class="text-[10px] font-bold text-[#002D72]">Expert Recommendation</span>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#002D72] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Imodium (Loperamide):</strong> High-volume standard for rapid motility relief. Recommended for short-term use.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-[#002D72] font-bold text-lg leading-none">●</span>
+                                <span class="text-xs text-slate-600"><strong>Reuterina:</strong> Top-selling probiotic for restoring flora balance post-viral infection.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Market Evolution Trend -->
     <section class="card-glass">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div class="lg:col-span-1">
-                <div class="inline-block px-3 py-1 rounded-md bg-[#002D72]/10 text-[#002D72] text-[10px] font-black uppercase mb-4 tracking-widest">Growth Evolution</div>
-                <h2 class="text-2xl font-bold mb-4 brand-text-primary">From Symptom Management to Immune Fortification</h2>
+                <div class="inline-block px-3 py-1 rounded-md bg-[#002D72]/10 text-[#002D72] text-[10px] font-black uppercase mb-4">Strategic Trend</div>
+                <h2 class="text-2xl font-bold mb-4">The Shift to Proactive Stomach Immunity</h2>
                 <p class="text-slate-500 text-sm mb-6 leading-relaxed">
-                    The South African consumer market has matured beyond traditional antacids. Consumers now seek "The Stomach-Immune Connection," driving high demand for antimicrobial products that offer barrier protection and microbiome support.
+                    Growth data shows a pivot from generic immune boosters (Vit C/Zinc) toward gut-centric immunity solutions. Consumers now associate a healthy microbiome with defense against seasonal gastric outbreaks.
                 </p>
-                <div class="space-y-4">
-                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Legacy Symptom Blockers</span>
-                        <span class="text-orange-600 font-black text-xs">DECLINING</span>
-                    </div>
-                    <div class="p-4 bg-[#97D700]/10 rounded-2xl border border-[#97D700]/20 flex items-center justify-between">
-                        <span class="text-xs font-bold text-[#48a23f] uppercase">Immunity Fortification</span>
-                        <span class="text-[#48a23f] font-black text-xs">ACCELERATING</span>
-                    </div>
+                <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+                    <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest block mb-1">Impact Score</span>
+                    <span class="text-2xl font-black text-emerald-800">+295%</span>
+                    <p class="text-[10px] text-emerald-600 mt-1">Growth in "Gut Immunity" search intent since 2019.</p>
                 </div>
             </div>
             <div class="lg:col-span-2">
@@ -172,13 +266,13 @@
         </div>
     </section>
 
+    <!-- Composition & Escalation Charts -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- OTC Composition -->
         <div class="card-glass">
             <div class="flex justify-between items-start mb-8">
                 <div>
-                    <h3 class="text-lg font-bold text-[#002D72]">OTC Product Composition</h3>
-                    <p class="text-xs text-slate-400">Total consumer retail spend by therapeutic category.</p>
+                    <h3 class="text-lg font-bold text-[#002D72]">OTC Market Composition</h3>
+                    <p class="text-xs text-slate-400">Spending distribution across S0 and S1 gastric brands.</p>
                 </div>
                 <div class="text-[#97D700] text-xl font-black">2024</div>
             </div>
@@ -189,48 +283,23 @@
                 <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--primary)"></span>Rehydration Salts (30%)</div>
                 <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--secondary)"></span>Probiotics (25%)</div>
                 <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--t1)"></span>Antimicrobials (20%)</div>
-                <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--t3)"></span>Antidiarrheals (15%)</div>
+                <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--t3)"></span>Antispasmodics (15%)</div>
             </div>
         </div>
 
-        <!-- Escalation Path -->
         <div class="card-glass">
-            <h3 class="text-lg font-bold text-[#002D72] mb-2">Patient Escalation Path</h3>
-            <p class="text-xs text-slate-400 mb-8">Clinical intervention vs. self-medication based on bug severity.</p>
+            <h3 class="text-lg font-bold text-[#002D72] mb-2">Prescription (Rx) Escalation</h3>
+            <p class="text-xs text-slate-400 mb-8">Transition from S0/S1 self-care to clinical intervention.</p>
             <div class="chart-container">
                 <canvas id="escalationChart"></canvas>
             </div>
-            <div class="mt-8 p-5 bg-[#002D72]/5 rounded-2xl border border-[#002D72]/10">
-                <p class="text-[11px] leading-relaxed text-[#002D72]/80">
-                    <span class="font-bold">Clinical Insight:</span> Severe food poisoning remains the primary driver for prescription anti-emetics and antibiotics, while OTC antimicrobials capture 72% of moderate gastric bug cases.
+            <div class="mt-6 p-4 bg-[#002D72]/5 rounded-xl border border-[#002D72]/10 text-center">
+                <p class="text-[11px] leading-relaxed text-[#002D72]/80 italic">
+                    While OTC dominates 75% of events, severe bacterial food poisoning drives a major shift toward S4 Rx antibiotics and anti-emetics.
                 </p>
             </div>
         </div>
     </div>
-
-    <!-- The Treatment Flow -->
-    <section class="card-glass text-center">
-        <h2 class="text-2xl font-bold mb-2">The Gastric Resilience Cycle</h2>
-        <p class="text-sm text-slate-400 mb-12">The typical consumer journey through infection and recovery.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center">
-                <div class="w-12 h-12 rounded-full bg-[#FF6A14] flex items-center justify-center text-white font-bold mb-4 shadow-xl">1</div>
-                <h4 class="font-bold text-sm mb-2 uppercase tracking-wide">Attack Phase</h4>
-                <p class="text-xs text-slate-500 leading-relaxed">Immediate pathogen onset. Goal: Pathogen suppression and rapid rehydration.</p>
-            </div>
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center">
-                <div class="w-12 h-12 rounded-full bg-[#00b2e3] flex items-center justify-center text-white font-bold mb-4 shadow-xl">2</div>
-                <h4 class="font-bold text-sm mb-2 uppercase tracking-wide">Cleanse Phase</h4>
-                <p class="text-xs text-slate-500 leading-relaxed">Silver-based antimicrobial intervention to neutralize viral or bacterial load.</p>
-            </div>
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center">
-                <div class="w-12 h-12 rounded-full bg-[#97D700] flex items-center justify-center text-[#002D72] font-bold mb-4 shadow-xl">3</div>
-                <h4 class="font-bold text-sm mb-2 uppercase tracking-wide">Fortify Phase</h4>
-                <p class="text-xs text-slate-500 leading-relaxed">Long-term flora restoration and barrier defense to build "Stomach Immunity."</p>
-            </div>
-        </div>
-    </section>
 
 </main>
 
@@ -241,12 +310,17 @@
                  alt="Silverlab Logo" 
                  class="silverlab-logo grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all">
             <p class="text-[10px] text-slate-400 max-w-sm text-center md:text-left leading-relaxed">
-                Market research data compiled from SA retail pharmacy tracking and consumer search intent logs. 
-                Copyright © 2024 Silverlab Healthcare. Not for public redistribution.
+                South African gastric market research synthesized for Silverlab Healthcare. 
+                S0/S1 regulatory designations as per SAHPRA guidelines. 
+                Copyright © 2024 Silverlab Healthcare.
             </p>
         </div>
         <div class="flex flex-col items-center md:items-end gap-6">
-            <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" target="_blank" class="text-xs font-black text-[#002D72] border-b-2 border-[#97D700] pb-1 hover:text-[#97D700] transition-colors">ACCESS DEEP RESEARCH</a>
+            <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" 
+               target="_blank" 
+               class="text-xs font-black text-[#002D72] border-b-2 border-[#97D700] pb-1 hover:text-[#97D700] transition-colors">
+                FULL RESEARCH ACCESS
+            </a>
             <span class="text-[10px] font-black tracking-[0.3em] text-slate-300 uppercase">South Africa • Global Healthcare</span>
         </div>
     </div>
@@ -288,7 +362,7 @@
                 labels: ['2019', '2020', '2021', '2022', '2023', '2024(E)'].map(wrapLabel),
                 datasets: [
                     {
-                        label: 'Immunity & Barrier Solution Growth',
+                        label: 'Immunity-Centric Gut Solutions',
                         data: [100, 115, 145, 190, 240, 295],
                         borderColor: '#97D700',
                         backgroundColor: 'rgba(151, 215, 0, 0.1)',
@@ -298,7 +372,7 @@
                         pointBackgroundColor: '#97D700'
                     },
                     {
-                        label: 'Reactive Symptom Blocking (Legacy)',
+                        label: 'Generic Immune (Vit C/Zinc)',
                         data: [180, 210, 205, 175, 160, 155],
                         borderColor: '#002D72',
                         backgroundColor: 'rgba(0, 45, 114, 0.05)',
@@ -317,7 +391,7 @@
                     tooltip: tooltipPlugin
                 },
                 scales: {
-                    y: { grid: { color: 'rgba(0,0,0,0.05)' }, title: { display: true, text: 'Growth Index' } },
+                    y: { grid: { color: 'rgba(0,0,0,0.05)' }, title: { display: true, text: 'Market Index' } },
                     x: { grid: { display: false } }
                 }
             }
@@ -327,7 +401,7 @@
         new Chart(ctxCategory, {
             type: 'doughnut',
             data: {
-                labels: ["Oral Rehydration Salts", "Probiotics", "Antimicrobials", "Antidiarrheals", "Antacids"].map(wrapLabel),
+                labels: ["Rehydration (S0)", "Probiotics (S0/S1)", "Antimicrobials (S0/S1)", "Antidiarrheals (S1)", "Antispasmodics (S0)"].map(wrapLabel),
                 datasets: [{
                     data: [30, 25, 20, 15, 10],
                     backgroundColor: ['#002D72', '#97D700', '#00b2e3', '#FF6A14', '#80286C'],
@@ -353,14 +427,14 @@
                 labels: ["Mild Distress", "Moderate Virus", "Severe Food Poisoning"].map(wrapLabel),
                 datasets: [
                     {
-                        label: 'OTC Self-Care Focus',
-                        data: [95, 68, 25],
+                        label: 'Retail/Pharmacy (S0/S1)',
+                        data: [95, 72, 18],
                         backgroundColor: '#002D72',
                         borderRadius: 8
                     },
                     {
-                        label: 'Clinical/Rx Intervention',
-                        data: [5, 32, 75],
+                        label: 'Prescription (S4+)',
+                        data: [5, 28, 82],
                         backgroundColor: '#878CB4',
                         borderRadius: 8
                     }
@@ -375,7 +449,7 @@
                 },
                 scales: {
                     x: { stacked: true, grid: { display: false } },
-                    y: { stacked: true, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, title: { display: true, text: '% Market Split' } }
+                    y: { stacked: true, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, title: { display: true, text: '% Coverage' } }
                 }
             }
         });
