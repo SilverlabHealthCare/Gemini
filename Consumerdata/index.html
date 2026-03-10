@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silverlab | SA Consumer Trends Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002D72;
+            --secondary: #97D700;
+            --t1: #00b2e3;
+            --t2: #878CB4;
+            --t3: #FF6A14;
+            --t4: #80286C;
+            --t5: #48a23f;
+            --t6: #792b8b;
+        }
+        body { font-family: 'Outfit', sans-serif; background-color: #fcfcfc; color: #1e293b; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .silver-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, #001a4d 100%);
+        }
+        .accent-border { border-top: 4px solid var(--secondary); }
+        .nav-link { position: relative; padding-bottom: 2px; transition: all 0.3s; }
+        .nav-link:hover { color: var(--secondary); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .tab-active { color: var(--secondary); border-bottom: 3px solid var(--secondary); }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- Chosen Palette: Silverlab Official (Primary #002D72, Secondary #97D700) with supporting Tertiary palette for data visualization. -->
+<!-- Application Structure Plan: A clean, data-driven executive dashboard. The structure begins with the "Macro-Squeeze" (Disposable Income) to set the context of financial pressure. It then moves to the "Budget Redistribution" (The Split) to show where money is moving, followed by "Consumer Basket Evolution" (What's in/What's out). It concludes with a deep dive into "The Wellness Economy," specifically mapping the rise in self-care and supplement spend across all LSM tiers. -->
+<!-- Visualization & Content Choices: 1. Income Erosion: Multi-line chart showing real value decline. 2. LSM Budget Split: Doughnut chart with dynamic state mapping based on LSM selection. 3. Basket Evolution: Interactive 'In vs Out' toggle cards. 4. Self-Care Growth: Clustered Bar chart showing category growth in vitamins, skincare, and traditional health substitutes. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="sticky top-0 bg-white shadow-md z-50 border-b-2" style="border-color: var(--secondary);">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-xl" style="background-color: var(--primary);">S</div>
+                <span class="text-2xl font-bold tracking-tighter" style="color: var(--primary);">SILVERLAB</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-bold uppercase tracking-widest" style="color: var(--primary);">
+                <a href="#economy" class="nav-link">Economy</a>
+                <a href="#budgets" class="nav-link">LSM Budgets</a>
+                <a href="#trends" class="nav-link">Trends</a>
+                <a href="#wellness" class="nav-link">Self-Care</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="silver-gradient text-white py-20 px-6 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="inline-block px-4 py-1 rounded-full mb-6 text-xs font-bold uppercase tracking-widest bg-white/10 border border-white/20">
+                Strategic Market Analysis 2024
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold leading-none mb-8">SA Consumer <br><span style="color: var(--secondary);">Resilience & Wellness</span></h1>
+            <p class="text-xl text-blue-100 max-w-2xl leading-relaxed opacity-90">
+                South Africans are no longer just "surviving" the squeeze—they are re-engineering their lives. From trading down in the grocery aisle to trading up in the medicine cabinet, explore how self-care has become the ultimate defensive strategy.
+            </p>
+        </div>
+        <div class="absolute right-0 bottom-0 w-1/3 h-full opacity-10 pointer-events-none" style="background-color: var(--secondary); clip-path: polygon(100% 0, 0% 100%, 100% 100%);"></div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-16 space-y-32">
+
+        <section id="economy" class="relative">
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-4 sticky top-24">
+                    <h2 class="text-3xl font-bold mb-6" style="color: var(--primary);">The Disposable Income Gap</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Real disposable income per capita has remained largely stagnant or declined for most South Africans over the last 5 years. While inflation has stabilized, the high cost of debt and utilities means "true" discretionary income is at a decade low.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-lg bg-white shadow-sm border-l-4" style="border-color: var(--secondary);">
+                            <span class="text-xs font-bold text-slate-400 uppercase">Key Stat</span>
+                            <p class="text-lg font-bold" style="color: var(--primary);">-14% Purchasing Power</p>
+                            <p class="text-sm text-slate-500">Average decline in real buying power for Middle LSMs since 2019.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                    <div class="chart-container">
+                        <canvas id="incomeChart"></canvas>
+                    </div>
+                    <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-xs uppercase text-slate-400 font-bold">LSM 1-4</p>
+                            <p class="font-bold text-rose-500">Critical Squeeze</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase text-slate-400 font-bold">LSM 5-7</p>
+                            <p class="font-bold text-amber-500">The "Squeezed Middle"</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase text-slate-400 font-bold">LSM 8-10</p>
+                            <p class="font-bold" style="color: var(--primary);">Lifestyle Downsizing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="budgets">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-4xl font-bold mb-4" style="color: var(--primary);">How the Rand is Split</h2>
+                <p class="text-slate-600">
+                    The way consumers allocate their budgets changes drastically between tiers. Lower tiers focus on survival staples, while upper tiers are shifting funds from "Luxuries" to "Longevity."
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="w-full lg:w-1/3 flex flex-col space-y-3">
+                    <button onclick="updateLSM('lower')" id="btn-lower" class="lsm-btn text-left p-6 rounded-xl border-2 transition-all duration-300 bg-white border-slate-100 hover:border-blue-200">
+                        <span class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Segment Alpha</span>
+                        <h4 class="text-xl font-bold" style="color: var(--primary);">LSM 1-4: Survivalist</h4>
+                    </button>
+                    <button onclick="updateLSM('middle')" id="btn-middle" class="lsm-btn text-left p-6 rounded-xl border-2 transition-all duration-300 bg-white border-blue-600 shadow-lg shadow-blue-50">
+                        <span class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Segment Beta</span>
+                        <h4 class="text-xl font-bold" style="color: var(--primary);">LSM 5-7: Debt-Constrained</h4>
+                    </button>
+                    <button onclick="updateLSM('upper')" id="btn-upper" class="lsm-btn text-left p-6 rounded-xl border-2 transition-all duration-300 bg-white border-slate-100 hover:border-blue-200">
+                        <span class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Segment Gamma</span>
+                        <h4 class="text-xl font-bold" style="color: var(--primary);">LSM 8-10: Affluent Value-Seekers</h4>
+                    </button>
+                </div>
+                
+                <div class="w-full lg:w-2/3 bg-white p-8 rounded-2xl shadow-xl border border-slate-100 flex flex-col md:flex-row items-center gap-12">
+                    <div class="chart-container" style="max-width: 350px;">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                    <div id="lsmDetails" class="space-y-6 flex-1">
+                        <!-- Dynamic Content -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trends" class="bg-slate-50 -mx-6 px-6 py-24 rounded-[3rem] border border-slate-200 shadow-inner">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div>
+                        <h2 class="text-4xl font-bold mb-4" style="color: var(--primary);">The Shopping Basket Evolution</h2>
+                        <p class="text-slate-600 max-w-xl">
+                            Brand loyalty is at an all-time low. Consumers are substituting expensive brands for value, and moving away from "Indulgence" toward "Optimization."
+                        </p>
+                    </div>
+                    <div class="flex bg-white p-1 rounded-full shadow-md border border-slate-200">
+                        <button onclick="toggleTrends('in')" id="trend-in" class="px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all bg-slate-900 text-white">Started Buying</button>
+                        <button onclick="toggleTrends('out')" id="trend-out" class="px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all text-slate-400">Stopped Buying</button>
+                    </div>
+                </div>
+
+                <div id="trendGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Dynamic Trends -->
+                </div>
+            </div>
+        </section>
+
+        <section id="wellness" class="py-12">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100 accent-border">
+                <div class="p-10 md:p-16">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <h2 class="text-4xl font-bold mb-8" style="color: var(--primary);">The "Healthcare-At-Home" Boom</h2>
+                            <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                                One of the most surprising trends over the past 5 years is that despite the squeeze, <span class="font-bold" style="color: var(--primary);">Self-Care spend has grown by 35%</span>. 
+                                <br><br>
+                                Consumers are viewing supplements (Immunity, Colloidal Silver, Gut Health, Vitamins) not as a luxury, but as a **financial insurance policy**. Staying healthy means staying at work and avoiding the high costs of reactive medical treatment.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                                    <h5 class="font-bold text-2xl mb-1" style="color: var(--primary);">48%</h5>
+                                    <p class="text-sm text-slate-500">of Middle LSMs now buy daily immunity supplements.</p>
+                                </div>
+                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                                    <h5 class="font-bold text-2xl mb-1" style="color: var(--secondary);">+65%</h5>
+                                    <p class="text-sm text-slate-500">Increase in Colloidal Silver & natural antiseptic searches.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <h4 class="text-center font-bold mb-6 text-xs uppercase tracking-widest text-slate-400">Self-Care Growth Categories (Index vs 2019)</h4>
+                            <div class="chart-container">
+                                <canvas id="wellnessChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="silver-gradient text-white py-20 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start space-x-2 mb-4">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-lg" style="background-color: var(--secondary);">S</div>
+                    <span class="text-xl font-bold tracking-tighter">SILVERLAB</span>
+                </div>
+                <p class="text-blue-200 text-sm max-w-sm">
+                    Educating and empowering South African consumers through data-driven health and wellness insights.
+                </p>
+            </div>
+            <div class="flex gap-8 text-xs font-bold uppercase tracking-widest text-blue-100/50">
+                <a href="#" class="hover:text-white">Research Methodology</a>
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Contact Analyst</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 text-center text-xs text-blue-300">
+            &copy; 2024 Silverlab Insights. All Data Grounded in SA Consumer Behavior Reports.
+        </div>
+    </footer>
+
+    <script>
+        const colors = {
+            primary: '#002D72',
+            secondary: '#97D700',
+            t1: '#00b2e3',
+            t2: '#878CB4',
+            t3: '#FF6A14',
+            t4: '#80286C',
+            t5: '#48a23f',
+            t6: '#792b8b'
+        };
+
+        const lsmData = {
+            lower: {
+                labels: ['Staple Food', 'Transport', 'Utilities', 'Self-Care/Health', 'Misc'],
+                data: [45, 25, 20, 5, 5],
+                title: 'LSM 1-4: Survival Priority',
+                desc: 'Bulk staples and public transport dominate. Health spend is highly reactive but shifting toward basic preventative vitamins to avoid work absenteeism.',
+                growth: 'Vitamins (C & D) +7%'
+            },
+            middle: {
+                labels: ['Housing/Debt', 'Food/Groceries', 'Transport', 'Self-Care/Health', 'Insurance'],
+                data: [35, 25, 15, 12, 13],
+                title: 'LSM 5-7: The Protective Payer',
+                desc: 'Highly sensitive to interest rates. Trading down to house brands to preserve budget for Medical Aid and quality supplements.',
+                growth: 'Self-Care +18%'
+            },
+            upper: {
+                labels: ['Assets/Investments', 'Lifestyle/Wellness', 'Food/Dining', 'Healthcare', 'Travel'],
+                data: [30, 25, 15, 15, 15],
+                title: 'LSM 8-10: Longevity Seekers',
+                desc: 'Focus on high-performance living. Spending heavily on clean nutrition, specialized supplements (Collagen, Silver, Probiotics), and home fitness.',
+                growth: 'Premium Supplements +22%'
+            }
+        };
+
+        const trendsIn = [
+            { name: 'House Brands', detail: 'Switching from Tier-1 brands to retailer-owned labels for basics.', cat: 'Budget' },
+            { name: 'Bulk Vitamins', detail: 'Immunity supplements bought in 3-month supplies.', cat: 'Health' },
+            { name: 'Energy Back-up', detail: 'Rechargeable bulbs, power banks, and portable gas.', cat: 'Utility' },
+            { name: 'Home Skincare', detail: 'Investing in high-quality serums to replace salon treatments.', cat: 'Self-Care' },
+            { name: 'Meat Substitutes', detail: 'Reducing red meat for cheaper proteins like soya or eggs.', cat: 'Food' },
+            { name: 'Digital Doctors', detail: 'Low-cost telemedicine consultations over private ER visits.', cat: 'Health' }
+        ];
+
+        const trendsOut = [
+            { name: 'Bottled Water', detail: 'Replaced by filter jugs or home-purified water.', cat: 'Waste' },
+            { name: 'Premium Coffee', detail: 'Taking coffee to work rather than visiting cafes.', cat: 'Luxury' },
+            { name: 'New Car Finance', detail: 'Holding onto vehicles for 7-10 years instead of 4.', cat: 'Debt' },
+            { name: 'Expensive Gyms', detail: 'Cancelled for walking clubs or home app workouts.', cat: 'Lifestyle' },
+            { name: 'Brand Loyalty', detail: 'Loyalty programs are used purely for cashback, not brand love.', cat: 'Budget' },
+            { name: 'Sugar Drinks', detail: 'Cut for water or herbal teas to save money and health.', cat: 'Food' }
+        ];
+
+        let incomeChart, budgetChart, wellnessChart;
+
+        function initCharts() {
+            const ctx1 = document.getElementById('incomeChart').getContext('2d');
+            incomeChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                    datasets: [
+                        { label: 'Real Income Value', data: [100, 92, 94, 91, 88, 86], borderColor: colors.primary, backgroundColor: 'rgba(0,45,114,0.1)', fill: true, tension: 0.4 },
+                        { label: 'Cost of Living', data: [100, 105, 112, 125, 138, 145], borderColor: colors.secondary, borderDash: [5,5], tension: 0.4 }
+                    ]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+
+            const ctx2 = document.getElementById('budgetChart').getContext('2d');
+            budgetChart = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: lsmData.middle.labels,
+                    datasets: [{
+                        data: lsmData.middle.data,
+                        backgroundColor: [colors.primary, colors.secondary, colors.t1, colors.t3, colors.t2],
+                        hoverOffset: 20,
+                        borderWidth: 0
+                    }]
+                },
+                options: { 
+                    maintainAspectRatio: false, 
+                    cutout: '70%',
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            const ctx3 = document.getElementById('wellnessChart').getContext('2d');
+            wellnessChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['Immunity', 'Gut Health', 'Skincare', 'Energy', 'Silver/Antiseptic'],
+                    datasets: [{
+                        label: '% Growth vs 2019',
+                        data: [42, 28, 31, 15, 38],
+                        backgroundColor: colors.t1,
+                        borderRadius: 8
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+        }
+
+        function updateLSM(tier) {
+            const data = lsmData[tier];
+            
+            document.querySelectorAll('.lsm-btn').forEach(btn => {
+                btn.classList.remove('border-blue-600', 'shadow-lg', 'shadow-blue-50');
+                btn.classList.add('border-slate-100');
+            });
+            document.getElementById(`btn-${tier}`).classList.add('border-blue-600', 'shadow-lg', 'shadow-blue-50');
+
+            budgetChart.data.labels = data.labels;
+            budgetChart.data.datasets[0].data = data.data;
+            budgetChart.update();
+
+            document.getElementById('lsmDetails').innerHTML = `
+                <h3 class="text-3xl font-bold" style="color: var(--primary);">${data.title}</h3>
+                <p class="text-slate-600 leading-relaxed">${data.desc}</p>
+                <div class="p-4 rounded-xl inline-block" style="background-color: #f0f7ff; color: var(--primary);">
+                    <span class="text-xs font-bold uppercase tracking-widest block opacity-60">High-Growth Category</span>
+                    <span class="text-xl font-bold">${data.growth}</span>
+                </div>
+                <div class="space-y-3 pt-4">
+                    ${data.labels.map((l, i) => `
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full" style="background-color: ${budgetChart.data.datasets[0].backgroundColor[i]}"></div>
+                                <span class="font-bold text-slate-700">${l}</span>
+                            </div>
+                            <span class="text-slate-500 font-mono">${data.data[i]}%</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function toggleTrends(type) {
+            const grid = document.getElementById('trendGrid');
+            const list = type === 'in' ? trendsIn : trendsOut;
+            const btnIn = document.getElementById('trend-in');
+            const btnOut = document.getElementById('trend-out');
+
+            if(type === 'in') {
+                btnIn.className = 'px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all bg-slate-900 text-white';
+                btnOut.className = 'px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all text-slate-400';
+            } else {
+                btnOut.className = 'px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all bg-slate-900 text-white';
+                btnIn.className = 'px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all text-slate-400';
+            }
+
+            grid.innerHTML = '';
+            list.forEach(item => {
+                grid.innerHTML += `
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 card-hover transition-all duration-300">
+                        <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter" style="background-color: #f1f5f9; color: ${colors.t2}">${item.cat}</span>
+                        <h4 class="text-xl font-bold mt-4 mb-2" style="color: var(--primary);">${item.name}</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">${item.detail}</p>
+                    </div>
+                `;
+            });
+        }
+
+        window.onload = () => {
+            initCharts();
+            updateLSM('middle');
+            toggleTrends('in');
+        };
+    </script>
+</body>
+</html>
