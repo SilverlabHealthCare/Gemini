@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silverlab | Gastric Health & Immune Research</title>
+    <title>Silverlab | SA Consumer Trends Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
-        
         :root {
             --primary: #002D72;
             --secondary: #97D700;
@@ -19,368 +18,349 @@
             --t5: #48a23f;
             --t6: #792b8b;
         }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #f8fafc;
-            color: #0f172a;
-        }
-
+        body { font-family: 'Outfit', sans-serif; background-color: #fcfcfc; color: #1e293b; }
         .chart-container {
             position: relative;
             width: 100%;
-            height: 320px;
+            max-width: 800px;
+            margin: auto;
+            height: 350px;
             max-height: 400px;
-            margin: 0 auto;
         }
-
-        .card-glass {
-            background: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 45, 114, 0.08);
-            border: 1px solid rgba(0, 45, 114, 0.05);
-            padding: 2rem;
+        .silver-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, #001a4d 100%);
         }
-
-        .brand-gradient {
-            background: linear-gradient(135deg, var(--primary) 0%, #0046b8 100%);
+        .accent-border { border-top: 4px solid var(--secondary); }
+        .nav-link { position: relative; padding-bottom: 2px; transition: all 0.3s; }
+        .nav-link:hover { color: var(--secondary); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
         }
-
-        .custom-bullet {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
+        .nav-link:hover::after { width: 100%; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .cta-button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transition: all 0.3s ease;
         }
-
-        .silverlab-logo {
-            width: 200px;
-            height: auto;
+        .cta-button:hover {
+            background-color: #86bd00;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(151, 215, 0, 0.4);
         }
     </style>
 </head>
 <body class="antialiased">
 
-<!-- 
-    CONFIRMATION: 
-    - NO MERMAID JS OR SVG USED. 
-    - ALL diagrams and icons are CSS/HTML based.
-    - Chart.js renders to Canvas exclusively.
--->
+<!-- Chosen Palette: Silverlab Official (Primary #002D72, Secondary #97D700) and full Tertiary spectrum. -->
+<!-- Application Structure Plan: A clean, single-page interactive report. The navigation features the official Silverlab logo and a "Read Research" CTA. Content is grouped into economic context, LSM budget breakdowns, basket shifts, and a deep dive into the preventative wellness boom. Each section features interactive visualizations and direct links back to the source research document. -->
+<!-- Visualization & Content Choices: 1. Line chart (Inflation vs Income). 2. Dynamic Doughnut (LSM selection). 3. Interaction-based Trend cards. 4. Bar chart (Self-care growth categories). -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-<nav class="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <img src="https://github.com/SilverlabHealthCare/Gemini/blob/main/Silverlablogo.png.png?raw=true" 
-                 alt="Silverlab Logo" 
-                 class="silverlab-logo">
+    <nav class="sticky top-0 bg-white shadow-md z-50 border-b-2" style="border-color: var(--secondary);">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://github.com/SilverlabHealthCare/Gemini/blob/main/Silverlablogo.png.png?raw=true" alt="Silverlab Logo" style="width: 200px; height: auto;">
+            </div>
+            <div class="hidden lg:flex space-x-8 text-sm font-bold uppercase tracking-widest items-center" style="color: var(--primary);">
+                <a href="#economy" class="nav-link">Economy</a>
+                <a href="#budgets" class="nav-link">LSM Budgets</a>
+                <a href="#trends" class="nav-link">Trends</a>
+                <a href="#wellness" class="nav-link">Self-Care</a>
+                <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" target="_blank" class="cta-button px-5 py-2 rounded-full text-xs">Read the Research</a>
+            </div>
         </div>
-        <div class="hidden lg:flex gap-6 items-center">
-            <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Market Insight Portal</span>
-            <div class="h-6 w-px bg-slate-200"></div>
-            <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" 
-               target="_blank" 
-               class="bg-[#97D700] text-[#002D72] text-[11px] font-black px-6 py-3 rounded-full shadow-sm hover:brightness-105 transition-all text-center">
-                READ THE DEEP RESEARCH FILE HERE
+    </nav>
+
+    <header class="silver-gradient text-white py-24 px-6 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="inline-block px-4 py-1 rounded-full mb-6 text-xs font-bold uppercase tracking-widest bg-white/10 border border-white/20">
+                Strategic Market Analysis 2024
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold leading-none mb-8">SA Consumer <br><span style="color: var(--secondary);">Resilience & Wellness</span></h1>
+            <p class="text-xl text-blue-100 max-w-2xl leading-relaxed opacity-90 mb-10">
+                South Africans are no longer just "surviving" the squeeze—they are re-engineering their lives. Explore the shift from reactive to preventative health as a primary financial strategy.
+            </p>
+            <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" target="_blank" class="cta-button inline-flex items-center px-8 py-4 rounded-full font-bold text-lg">
+                Read the Research Here
+                <span class="ml-2 text-xl">→</span>
             </a>
         </div>
-    </div>
-</nav>
+        <div class="absolute right-0 bottom-0 w-1/3 h-full opacity-10 pointer-events-none" style="background-color: var(--secondary); clip-path: polygon(100% 0, 0% 100%, 100% 100%);"></div>
+    </header>
 
-<header class="brand-gradient text-white py-20 px-6 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                Driving <span class="text-[#97D700]">Gastric Immunity</span> Innovation
-            </h1>
-            <p class="text-lg text-slate-300 mb-8 max-w-xl">
-                Analyzing the strategic shift in the South African consumer market: moving from reactive symptom management to proactive stomach health fortification.
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <div class="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
-                    <span class="block text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">Market Reach</span>
-                    <span class="text-2xl font-bold">18.4M Consumers</span>
+    <main class="max-w-7xl mx-auto px-6 py-16 space-y-32">
+
+        <section id="economy" class="relative">
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-4 sticky top-24">
+                    <h2 class="text-3xl font-bold mb-6" style="color: var(--primary);">The Disposable Income Gap</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        Real purchasing power has eroded by ~14% since 2019. Consumers are facing high utility costs and debt servicing, forcing a radical prioritization of spend.
+                    </p>
+                    <div class="p-6 rounded-2xl bg-blue-50 border border-blue-100 mb-8">
+                        <h4 class="font-bold text-sm uppercase tracking-widest mb-2" style="color: var(--primary);">Resource</h4>
+                        <p class="text-sm text-slate-600 mb-4">View granular data on inflation baskets and historical LSM income benchmarks.</p>
+                        <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" target="_blank" class="font-bold text-sm underline" style="color: var(--primary);">Download Research PDF</a>
+                    </div>
                 </div>
-                <div class="bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
-                    <span class="block text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">Growth Trends</span>
-                    <span class="text-2xl font-bold">+28% YoY Vol.</span>
+                <div class="lg:col-span-8 bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                    <div class="chart-container">
+                        <canvas id="incomeChart"></canvas>
+                    </div>
+                    <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-xs uppercase text-slate-400 font-bold">LSM 1-4</p>
+                            <p class="font-bold text-rose-500">Critical Squeeze</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase text-slate-400 font-bold">LSM 5-7</p>
+                            <p class="font-bold text-amber-500">Squeezed Middle</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase text-slate-400 font-bold">LSM 8-10</p>
+                            <p class="font-bold" style="color: var(--primary);">Value Optimization</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="hidden md:block">
-            <div class="card-glass border-none shadow-2xl bg-white/5 backdrop-blur-xl p-8">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-3 h-3 rounded-full bg-[#97D700] animate-pulse"></div>
-                    <span class="text-xs font-black tracking-widest text-[#97D700] uppercase">Strategic Sentiment Focus</span>
+        </section>
+
+        <section id="budgets">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-4xl font-bold mb-4" style="color: var(--primary);">LSM Budget Distribution</h2>
+                <p class="text-slate-600">
+                    Interact with the segments below to see how the "Health & Wellness" slice of the budget is expanding as a defensive expense.
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="w-full lg:w-1/3 flex flex-col space-y-3">
+                    <button onclick="updateLSM('lower')" id="btn-lower" class="lsm-btn text-left p-6 rounded-xl border-2 transition-all duration-300 bg-white border-slate-100 hover:border-blue-200">
+                        <h4 class="text-xl font-bold" style="color: var(--primary);">LSM 1-4: Survival</h4>
+                    </button>
+                    <button onclick="updateLSM('middle')" id="btn-middle" class="lsm-btn text-left p-6 rounded-xl border-2 transition-all duration-300 bg-white border-blue-600 shadow-lg shadow-blue-50">
+                        <h4 class="text-xl font-bold" style="color: var(--primary);">LSM 5-7: Squeezed Middle</h4>
+                    </button>
+                    <button onclick="updateLSM('upper')" id="btn-upper" class="lsm-btn text-left p-6 rounded-xl border-2 transition-all duration-300 bg-white border-slate-100 hover:border-blue-200">
+                        <h4 class="text-xl font-bold" style="color: var(--primary);">LSM 8-10: Affluent Value</h4>
+                    </button>
                 </div>
-                <div class="space-y-6">
+                
+                <div class="w-full lg:w-2/3 bg-white p-8 rounded-2xl shadow-xl border border-slate-100 flex flex-col md:flex-row items-center gap-12">
+                    <div class="chart-container" style="max-width: 350px;">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                    <div id="lsmDetails" class="space-y-6 flex-1">
+                        <!-- Dynamic JS Content -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trends" class="bg-slate-50 -mx-6 px-6 py-24 rounded-[3rem] border border-slate-200">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                     <div>
-                        <div class="flex justify-between text-[11px] font-bold uppercase text-slate-300 mb-2">
-                            <span>Speed of Symptom Action</span>
-                            <span>88% Priority</span>
-                        </div>
-                        <div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                            <div class="h-full bg-[#97D700] w-[88%]"></div>
-                        </div>
+                        <h2 class="text-4xl font-bold mb-4" style="color: var(--primary);">Consumer Habit Evolution</h2>
+                        <p class="text-slate-600 max-w-xl">
+                            The "Stickiness" of brands has faded. Habitual shopping has been replaced by calculated value seeking and holistic health investments.
+                        </p>
                     </div>
-                    <div>
-                        <div class="flex justify-between text-[11px] font-bold uppercase text-slate-300 mb-2">
-                            <span>Microbiome Protection</span>
-                            <span>62% Priority</span>
+                    <div class="flex bg-white p-1 rounded-full shadow-md border border-slate-200">
+                        <button onclick="toggleTrends('in')" id="trend-in" class="px-8 py-3 rounded-full text-sm font-bold uppercase transition-all bg-slate-900 text-white">Started Buying</button>
+                        <button onclick="toggleTrends('out')" id="trend-out" class="px-8 py-3 rounded-full text-sm font-bold uppercase transition-all text-slate-400">Stopped Buying</button>
+                    </div>
+                </div>
+
+                <div id="trendGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Dynamic Trends Content -->
+                </div>
+            </div>
+        </section>
+
+        <section id="wellness" class="py-12">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100 accent-border">
+                <div class="p-10 md:p-16">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <h2 class="text-4xl font-bold mb-8" style="color: var(--primary);">The Self-Care Economy</h2>
+                            <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                                Consumers are spending <span class="font-bold" style="color: var(--primary);">35% more</span> on supplements. Preventative care (Immunity, Gut Health, Silver Antiseptics) is now a "top-tier" budget priority to avoid work absenteeism.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center">
+                                    <h5 class="font-bold text-2xl mb-1" style="color: var(--primary);">48%</h5>
+                                    <p class="text-xs text-slate-500 uppercase font-bold">Daily Supplement Users</p>
+                                </div>
+                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center">
+                                    <h5 class="font-bold text-2xl mb-1" style="color: var(--secondary);">+65%</h5>
+                                    <p class="text-xs text-slate-500 uppercase font-bold">Natural Health Interest</p>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" target="_blank" class="cta-button inline-block px-8 py-4 rounded-full font-bold">Get Detailed Research</a>
+                            </div>
                         </div>
-                        <div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                            <div class="h-full bg-[#00b2e3] w-[62%]"></div>
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <h4 class="text-center font-bold mb-6 text-xs uppercase tracking-widest text-slate-400">Category Growth Index</h4>
+                            <div class="chart-container">
+                                <canvas id="wellnessChart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <p class="mt-8 text-xs text-slate-400 leading-relaxed italic">
-                    "South African consumers are increasingly seeking solutions that neutralize pathogens without compromising their natural gastric defenses."
-                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="silver-gradient text-white py-20 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div>
+                <img src="https://github.com/SilverlabHealthCare/Gemini/blob/main/Silverlablogo.png.png?raw=true" alt="Silverlab Logo" style="width: 150px; height: auto; filter: brightness(0) invert(1);" class="mb-4">
+                <p class="text-blue-200 text-sm max-w-sm">Driving proactive health and wellness choices through consumer-centric data.</p>
+            </div>
+            <div class="flex flex-col items-center md:items-end gap-4">
+                <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" target="_blank" class="cta-button px-6 py-3 rounded-full text-xs font-bold uppercase">Research Portal</a>
+                <p class="text-[10px] uppercase tracking-widest text-blue-100/30">Official Analysis &copy; 2024</p>
             </div>
         </div>
-    </div>
-</header>
+    </footer>
 
-<main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
+    <script>
+        const colors = {
+            primary: '#002D72',
+            secondary: '#97D700',
+            t1: '#00b2e3',
+            t2: '#878CB4',
+            t3: '#FF6A14',
+            t4: '#80286C'
+        };
 
-    <!-- From Symptom Management to Immune Fortification -->
-    <section class="card-glass">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div class="lg:col-span-1">
-                <div class="inline-block px-3 py-1 rounded-md bg-[#002D72]/10 text-[#002D72] text-[10px] font-black uppercase mb-4 tracking-widest">Growth Evolution</div>
-                <h2 class="text-2xl font-bold mb-4 brand-text-primary">From Symptom Management to Immune Fortification</h2>
-                <p class="text-slate-500 text-sm mb-6 leading-relaxed">
-                    The South African consumer market has matured beyond traditional antacids. Consumers now seek "The Stomach-Immune Connection," driving high demand for antimicrobial products that offer barrier protection and microbiome support.
-                </p>
-                <div class="space-y-4">
-                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-600 uppercase">Legacy Symptom Blockers</span>
-                        <span class="text-orange-600 font-black text-xs">DECLINING</span>
-                    </div>
-                    <div class="p-4 bg-[#97D700]/10 rounded-2xl border border-[#97D700]/20 flex items-center justify-between">
-                        <span class="text-xs font-bold text-[#48a23f] uppercase">Immunity Fortification</span>
-                        <span class="text-[#48a23f] font-black text-xs">ACCELERATING</span>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:col-span-2">
-                <div class="chart-container">
-                    <canvas id="evolutionChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- OTC Composition -->
-        <div class="card-glass">
-            <div class="flex justify-between items-start mb-8">
-                <div>
-                    <h3 class="text-lg font-bold text-[#002D72]">OTC Product Composition</h3>
-                    <p class="text-xs text-slate-400">Total consumer retail spend by therapeutic category.</p>
-                </div>
-                <div class="text-[#97D700] text-xl font-black">2024</div>
-            </div>
-            <div class="chart-container">
-                <canvas id="categoryChart"></canvas>
-            </div>
-            <div class="mt-8 grid grid-cols-2 gap-y-3">
-                <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--primary)"></span>Rehydration Salts (30%)</div>
-                <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--secondary)"></span>Probiotics (25%)</div>
-                <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--t1)"></span>Antimicrobials (20%)</div>
-                <div class="text-[10px] font-bold text-slate-500 flex items-center"><span class="custom-bullet" style="background:var(--t3)"></span>Antidiarrheals (15%)</div>
-            </div>
-        </div>
-
-        <!-- Escalation Path -->
-        <div class="card-glass">
-            <h3 class="text-lg font-bold text-[#002D72] mb-2">Patient Escalation Path</h3>
-            <p class="text-xs text-slate-400 mb-8">Clinical intervention vs. self-medication based on bug severity.</p>
-            <div class="chart-container">
-                <canvas id="escalationChart"></canvas>
-            </div>
-            <div class="mt-8 p-5 bg-[#002D72]/5 rounded-2xl border border-[#002D72]/10">
-                <p class="text-[11px] leading-relaxed text-[#002D72]/80">
-                    <span class="font-bold">Clinical Insight:</span> Severe food poisoning remains the primary driver for prescription anti-emetics and antibiotics, while OTC antimicrobials capture 72% of moderate gastric bug cases.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- The Treatment Flow -->
-    <section class="card-glass text-center">
-        <h2 class="text-2xl font-bold mb-2">The Gastric Resilience Cycle</h2>
-        <p class="text-sm text-slate-400 mb-12">The typical consumer journey through infection and recovery.</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center">
-                <div class="w-12 h-12 rounded-full bg-[#FF6A14] flex items-center justify-center text-white font-bold mb-4 shadow-xl">1</div>
-                <h4 class="font-bold text-sm mb-2 uppercase tracking-wide">Attack Phase</h4>
-                <p class="text-xs text-slate-500 leading-relaxed">Immediate pathogen onset. Goal: Pathogen suppression and rapid rehydration.</p>
-            </div>
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center">
-                <div class="w-12 h-12 rounded-full bg-[#00b2e3] flex items-center justify-center text-white font-bold mb-4 shadow-xl">2</div>
-                <h4 class="font-bold text-sm mb-2 uppercase tracking-wide">Cleanse Phase</h4>
-                <p class="text-xs text-slate-500 leading-relaxed">Silver-based antimicrobial intervention to neutralize viral or bacterial load.</p>
-            </div>
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col items-center">
-                <div class="w-12 h-12 rounded-full bg-[#97D700] flex items-center justify-center text-[#002D72] font-bold mb-4 shadow-xl">3</div>
-                <h4 class="font-bold text-sm mb-2 uppercase tracking-wide">Fortify Phase</h4>
-                <p class="text-xs text-slate-500 leading-relaxed">Long-term flora restoration and barrier defense to build "Stomach Immunity."</p>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<footer class="bg-white border-t border-slate-200 py-20 px-6">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-        <div class="flex flex-col items-center md:items-start gap-6">
-            <img src="https://github.com/SilverlabHealthCare/Gemini/blob/main/Silverlablogo.png.png?raw=true" 
-                 alt="Silverlab Logo" 
-                 class="silverlab-logo grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all">
-            <p class="text-[10px] text-slate-400 max-w-sm text-center md:text-left leading-relaxed">
-                Market research data compiled from SA retail pharmacy tracking and consumer search intent logs. 
-                Copyright © 2024 Silverlab Healthcare. Not for public redistribution.
-            </p>
-        </div>
-        <div class="flex flex-col items-center md:items-end gap-6">
-            <a href="https://docs.google.com/document/d/1_34omgdqn8edeeemvwPhDDKqzdVm1KdJSD351PnpvTs/edit?usp=sharing" target="_blank" class="text-xs font-black text-[#002D72] border-b-2 border-[#97D700] pb-1 hover:text-[#97D700] transition-colors">ACCESS DEEP RESEARCH</a>
-            <span class="text-[10px] font-black tracking-[0.3em] text-slate-300 uppercase">South Africa • Global Healthcare</span>
-        </div>
-    </div>
-</footer>
-
-<script>
-    function wrapLabel(label) {
-        if (!label || label.length <= 16) return label;
-        const words = label.split(' ');
-        const lines = [];
-        let current = '';
-        words.forEach(word => {
-            if ((current + word).length > 16) {
-                if (current) lines.push(current.trim());
-                current = word + ' ';
-            } else {
-                current += word + ' ';
+        const lsmData = {
+            lower: {
+                labels: ['Food', 'Transport', 'Utilities', 'Health', 'Other'],
+                data: [45, 25, 20, 5, 5],
+                title: 'LSM 1-4 Analysis',
+                desc: 'Budget is dominated by transport and staples. Health spend is highly reactive.',
+                growth: 'Basic Vitamins +7%'
+            },
+            middle: {
+                labels: ['Debt/Rent', 'Food', 'Transport', 'Self-Care', 'Other'],
+                data: [35, 25, 15, 12, 13],
+                title: 'LSM 5-7 Analysis',
+                desc: 'Middle-income debt squeeze. Self-care is growing as a substitution for clinic visits.',
+                growth: 'Supplements +18%'
+            },
+            upper: {
+                labels: ['Investments', 'Lifestyle', 'Groceries', 'Health', 'Other'],
+                data: [30, 25, 15, 15, 15],
+                title: 'LSM 8-10 Analysis',
+                desc: 'Affluent groups shifting spend toward longevity and performance-based wellness.',
+                growth: 'Premium Health +22%'
             }
-        });
-        if (current) lines.push(current.trim());
-        return lines;
-    }
+        };
 
-    const tooltipPlugin = {
-        callbacks: {
-            title: function(tooltipItems) {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                return Array.isArray(label) ? label.join(' ') : label;
-            }
+        const trendsIn = [
+            { name: 'House Brands', detail: 'Store-owned labels replacing heritage brands.', cat: 'Budget' },
+            { name: 'Immunity Staples', detail: 'Consistent monthly buy of Vitamin C/Silver.', cat: 'Health' },
+            { name: 'Digital Doctors', detail: 'Low-cost telemedicine over physical visits.', cat: 'Tech' },
+            { name: 'Bulk Buying', detail: 'Buying 5kg+ staples to hedge inflation.', cat: 'Strategy' }
+        ];
+
+        const trendsOut = [
+            { name: 'Bottled Water', detail: 'Switch to filters or tap.', cat: 'Waste' },
+            { name: 'Leasing Cars', detail: 'Consumers keeping vehicles longer.', cat: 'Debt' },
+            { name: 'Brand Loyalty', detail: 'Price and performance outweigh history.', cat: 'Market' },
+            { name: 'Sugary Drinks', detail: 'Cutting luxury calories to save rands.', cat: 'Diet' }
+        ];
+
+        let incomeChart, budgetChart, wellnessChart;
+
+        function initCharts() {
+            const ctx1 = document.getElementById('incomeChart').getContext('2d');
+            incomeChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                    datasets: [
+                        { label: 'Buying Power', data: [100, 92, 94, 91, 88, 86], borderColor: colors.primary, backgroundColor: 'rgba(0,45,114,0.1)', fill: true },
+                        { label: 'Cost Index', data: [100, 105, 112, 125, 138, 145], borderColor: colors.secondary, borderDash: [5,5] }
+                    ]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+
+            const ctx2 = document.getElementById('budgetChart').getContext('2d');
+            budgetChart = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: lsmData.middle.labels,
+                    datasets: [{
+                        data: lsmData.middle.data,
+                        backgroundColor: [colors.primary, colors.secondary, colors.t1, colors.t3, colors.t2],
+                        borderWidth: 0
+                    }]
+                },
+                options: { maintainAspectRatio: false, cutout: '75%', plugins: { legend: { display: false } } }
+            });
+
+            const ctx3 = document.getElementById('wellnessChart').getContext('2d');
+            wellnessChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['Immunity', 'Silver', 'Gut Health', 'Skincare'],
+                    datasets: [{ data: [42, 38, 28, 31], backgroundColor: colors.t1, borderRadius: 8 }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
         }
-    };
 
-    window.onload = function() {
-        const ctxEvolution = document.getElementById('evolutionChart').getContext('2d');
-        new Chart(ctxEvolution, {
-            type: 'line',
-            data: {
-                labels: ['2019', '2020', '2021', '2022', '2023', '2024(E)'].map(wrapLabel),
-                datasets: [
-                    {
-                        label: 'Immunity & Barrier Solution Growth',
-                        data: [100, 115, 145, 190, 240, 295],
-                        borderColor: '#97D700',
-                        backgroundColor: 'rgba(151, 215, 0, 0.1)',
-                        borderWidth: 4,
-                        fill: true,
-                        tension: 0.4,
-                        pointBackgroundColor: '#97D700'
-                    },
-                    {
-                        label: 'Reactive Symptom Blocking (Legacy)',
-                        data: [180, 210, 205, 175, 160, 155],
-                        borderColor: '#002D72',
-                        backgroundColor: 'rgba(0, 45, 114, 0.05)',
-                        borderWidth: 3,
-                        borderDash: [5, 5],
-                        fill: false,
-                        tension: 0.4
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'top', labels: { font: { size: 10, weight: 'bold' }, usePointStyle: true } },
-                    tooltip: tooltipPlugin
-                },
-                scales: {
-                    y: { grid: { color: 'rgba(0,0,0,0.05)' }, title: { display: true, text: 'Growth Index' } },
-                    x: { grid: { display: false } }
-                }
-            }
-        });
+        function updateLSM(tier) {
+            const d = lsmData[tier];
+            document.querySelectorAll('.lsm-btn').forEach(b => b.classList.remove('border-blue-600', 'shadow-lg'));
+            document.getElementById(`btn-${tier}`).classList.add('border-blue-600', 'shadow-lg');
+            budgetChart.data.labels = d.labels;
+            budgetChart.data.datasets[0].data = d.data;
+            budgetChart.update();
+            document.getElementById('lsmDetails').innerHTML = `
+                <h3 class="text-3xl font-bold" style="color: var(--primary);">${d.title}</h3>
+                <p class="text-slate-600">${d.desc}</p>
+                <div class="p-3 bg-blue-50 text-blue-900 rounded-lg inline-block font-bold">${d.growth}</div>
+                <div class="space-y-2 mt-4">
+                   ${d.labels.map((l, i) => `
+                        <div class="flex justify-between text-xs font-bold border-b pb-1">
+                            <span>${l}</span>
+                            <span>${d.data[i]}%</span>
+                        </div>
+                   `).join('')}
+                </div>
+            `;
+        }
 
-        const ctxCategory = document.getElementById('categoryChart').getContext('2d');
-        new Chart(ctxCategory, {
-            type: 'doughnut',
-            data: {
-                labels: ["Oral Rehydration Salts", "Probiotics", "Antimicrobials", "Antidiarrheals", "Antacids"].map(wrapLabel),
-                datasets: [{
-                    data: [30, 25, 20, 15, 10],
-                    backgroundColor: ['#002D72', '#97D700', '#00b2e3', '#FF6A14', '#80286C'],
-                    borderWidth: 4,
-                    borderColor: '#ffffff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '75%',
-                plugins: {
-                    legend: { display: false },
-                    tooltip: tooltipPlugin
-                }
-            }
-        });
+        function toggleTrends(t) {
+            const list = t === 'in' ? trendsIn : trendsOut;
+            document.getElementById('trendGrid').innerHTML = list.map(i => `
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 card-hover">
+                    <span class="text-[10px] font-bold uppercase text-slate-400">${i.cat}</span>
+                    <h4 class="text-lg font-bold mt-2" style="color: var(--primary);">${i.name}</h4>
+                    <p class="text-xs text-slate-500 mt-1">${i.detail}</p>
+                </div>
+            `).join('');
+            document.getElementById('trend-in').className = t === 'in' ? 'px-8 py-3 rounded-full text-sm font-bold bg-slate-900 text-white' : 'px-8 py-3 rounded-full text-sm font-bold text-slate-400';
+            document.getElementById('trend-out').className = t === 'out' ? 'px-8 py-3 rounded-full text-sm font-bold bg-slate-900 text-white' : 'px-8 py-3 rounded-full text-sm font-bold text-slate-400';
+        }
 
-        const ctxEscalation = document.getElementById('escalationChart').getContext('2d');
-        new Chart(ctxEscalation, {
-            type: 'bar',
-            data: {
-                labels: ["Mild Distress", "Moderate Virus", "Severe Food Poisoning"].map(wrapLabel),
-                datasets: [
-                    {
-                        label: 'OTC Self-Care Focus',
-                        data: [95, 68, 25],
-                        backgroundColor: '#002D72',
-                        borderRadius: 8
-                    },
-                    {
-                        label: 'Clinical/Rx Intervention',
-                        data: [5, 32, 75],
-                        backgroundColor: '#878CB4',
-                        borderRadius: 8
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
-                    tooltip: tooltipPlugin
-                },
-                scales: {
-                    x: { stacked: true, grid: { display: false } },
-                    y: { stacked: true, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, title: { display: true, text: '% Market Split' } }
-                }
-            }
-        });
-    };
-</script>
-
+        window.onload = () => { initCharts(); updateLSM('middle'); toggleTrends('in'); };
+    </script>
 </body>
 </html>
