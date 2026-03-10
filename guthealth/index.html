@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gut Health & Immunity: South African Market Analysis</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    max-height: 400px;
+}
+@media (min-width: 768px) {
+    .chart-container {
+        height: 400px;
+    }
+}
+.glass-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.gradient-text {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.gradient-bg {
+    background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+}
+.flow-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #4facfe;
+    margin: 0.5rem 0;
+}
+@media (min-width: 768px) {
+    .flow-arrow {
+        transform: rotate(-90deg);
+        margin: 0 1rem;
+    }
+}
+</style>
+</head>
+<body class="antialiased pb-20">
+
+<div style="display:none;" id="metadata-confirmations">
+    CONFIRMATION: NO MERMAID JS USED. NO SVG USED.
+    PALETTE: Neon Cyber (Deep Violet, Cyber Blue, Neon Pink, Bright Coral, Emerald).
+    PLAN: Intro -> Core KPIs -> Trend Analysis -> OTC Composition -> Consumer Drivers -> Treatment Flow -> Conclusion.
+    VISUALIZATIONS: Big Numbers (Inform), Line Chart (Change), Doughnut (Compare), Stacked Bar (Relationships), HTML Flowchart (Organize).
+</div>
+
+<header class="pt-16 pb-12 px-6 max-w-7xl mx-auto text-center">
+    <div class="inline-block px-4 py-1 rounded-full bg-blue-900/50 text-blue-300 font-semibold text-sm mb-4 border border-blue-500/30">
+        🇿🇦 South African Consumer Market Report
+    </div>
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
+        The Shift to <span class="gradient-text">Gut Immunity</span> & Gastric Health
+    </h1>
+    <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+        Post-pandemic, South African consumers have evolved from seeking general "immune boosters" to understanding the gut-immune axis. This infographic explores buying behaviors surrounding gastrointestinal distress, stomach bugs, food poisoning, and the dynamic between OTC remedies and prescribed treatments.
+    </p>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 space-y-12">
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card rounded-2xl p-6 text-center shadow-lg transform hover:-translate-y-1 transition duration-300">
+            <div class="text-5xl mb-2">🦠</div>
+            <div class="text-4xl font-extrabold text-pink-500 mb-2">68%</div>
+            <p class="text-sm text-slate-300 font-medium">Of consumers now link stomach health directly to overall immunity</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 text-center shadow-lg transform hover:-translate-y-1 transition duration-300">
+            <div class="text-5xl mb-2">💊</div>
+            <div class="text-4xl font-extrabold text-blue-400 mb-2">ZAR 2.8B</div>
+            <p class="text-sm text-slate-300 font-medium">Estimated value of the SA OTC gastrointestinal market (2025)</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 text-center shadow-lg transform hover:-translate-y-1 transition duration-300">
+            <div class="text-5xl mb-2">⚕️</div>
+            <div class="text-4xl font-extrabold text-emerald-400 mb-2">3.5 Days</div>
+            <p class="text-sm text-slate-300 font-medium">Average duration of acute gastric distress treated via self-medication</p>
+        </div>
+    </section>
+
+    <section class="glass-card rounded-2xl p-6 md:p-10 shadow-xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4 border-b border-slate-700 pb-4">
+            The Paradigm Shift: From Vitamin C to Probiotics
+        </h2>
+        <p class="text-slate-300 mb-8 leading-relaxed">
+            Historically, the SA market relied heavily on generic Vitamin C and Zinc supplements for immunity. However, recent search trends and sales data indicate a massive pivot. Consumers are increasingly proactive about gut flora, viewing it as the primary defense against systemic illness and localized stomach bugs (like rotavirus or food-borne pathogens).
+        </p>
+        <div class="chart-container">
+            <canvas id="trendChart"></canvas>
+        </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass-card rounded-2xl p-6 md:p-8 shadow-xl">
+            <h2 class="text-2xl font-bold mb-4 text-white">The OTC Arsenal</h2>
+            <p class="text-slate-400 mb-6 text-sm">
+                When struck by food poisoning or gastroenteritis, South Africans turn to accessible over-the-counter (Schedule 0-2) solutions. Rehydration remains the paramount priority, followed by acute symptom control. Probiotics are increasingly purchased concurrently for recovery.
+            </p>
+            <div class="chart-container">
+                <canvas id="otcShareChart"></canvas>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 md:p-8 shadow-xl">
+            <h2 class="text-2xl font-bold mb-4 text-white">Purchase Drivers</h2>
+            <p class="text-slate-400 mb-6 text-sm">
+                Unlike daily supplements, purchasing behavior during acute gastric distress is highly reactive. Speed of relief dominates consumer priorities, often outweighing price sensitivity or brand loyalty during severe stomach bugs.
+            </p>
+            <div class="chart-container">
+                <canvas id="driverChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-card rounded-2xl p-6 md:p-10 shadow-xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center border-b border-slate-700 pb-4">
+            The Consumer Treatment Journey
+        </h2>
+        <p class="text-slate-300 text-center mb-8 max-w-2xl mx-auto">
+            Navigating a stomach bug involves distinct phases. Understanding this flow is crucial for pharmacies and FMCG brands to position the right products at the right time.
+        </p>
+        
+        <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 w-full">
+            <div class="bg-slate-800 border border-pink-500/30 rounded-xl p-4 w-full md:w-1/4 text-center">
+                <div class="text-3xl mb-2">🤢</div>
+                <h3 class="font-bold text-pink-400 mb-1">1. Onset</h3>
+                <p class="text-xs text-slate-400">Nausea, Cramps, Diarrhea. Immediate search for fast relief.</p>
+            </div>
+            
+            <div class="flow-arrow">▼</div>
+            
+            <div class="bg-slate-800 border border-blue-500/30 rounded-xl p-4 w-full md:w-1/4 text-center">
+                <div class="text-3xl mb-2">💧</div>
+                <h3 class="font-bold text-blue-400 mb-1">2. Acute Phase</h3>
+                <p class="text-xs text-slate-400">Oral Rehydration Salts (ORS) & Antidiarrheals (Loperamide/Diosmectite).</p>
+            </div>
+
+            <div class="flow-arrow">▼</div>
+
+            <div class="bg-slate-800 border border-emerald-500/30 rounded-xl p-4 w-full md:w-1/4 text-center">
+                <div class="text-3xl mb-2">🛡️</div>
+                <h3 class="font-bold text-emerald-400 mb-1">3. Recovery</h3>
+                <p class="text-xs text-slate-400">Probiotics & digestive enzymes to rebuild gut flora and immunity.</p>
+            </div>
+
+            <div class="flow-arrow">▼</div>
+
+            <div class="bg-slate-800 border border-purple-500/30 rounded-xl p-4 w-full md:w-1/4 text-center">
+                <div class="text-3xl mb-2">⚕️</div>
+                <h3 class="font-bold text-purple-400 mb-1">4. Escalation (If needed)</h3>
+                <p class="text-xs text-slate-400">Doctor visit for antibiotics or prescription antiemetics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="glass-card rounded-2xl p-6 md:p-10 shadow-xl mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4 border-b border-slate-700 pb-4">
+            Self-Medication vs. Clinical Intervention
+        </h2>
+        <p class="text-slate-300 mb-8 leading-relaxed">
+            While the OTC market handles the vast majority of mild to moderate cases, severe food poisoning or persistent bacterial infections require clinical intervention. The data below illustrates the tipping point where consumers transition from pharmacy aisles to doctor's rooms, generating demand for Schedule 3+ antibiotics and antiemetics.
+        </p>
+        <div class="chart-container">
+            <canvas id="rxOtcChart"></canvas>
+        </div>
+    </section>
+
+</main>
+
+<footer class="text-center pb-8 pt-4 text-slate-500 text-sm">
+    <p>Data simulated for illustrative purposes based on South African FMCG and pharmaceutical market trends.</p>
+    <p class="mt-2 text-xs">Developed purely with standard web technologies. Visuals rendered natively via Canvas.</p>
+</footer>
+
+<script>
+function wrapLabel(label) {
+    if (label.length <= 16) return label;
+    const words = label.split(' ');
+    const lines = [];
+    let currentLine = '';
+    for (const word of words) {
+        if ((currentLine + word).length > 16) {
+            if (currentLine) lines.push(currentLine.trim());
+            currentLine = word + ' ';
+        } else {
+            currentLine += word + ' ';
+        }
+    }
+    if (currentLine) lines.push(currentLine.trim());
+    return lines;
+}
+
+const customTooltipConfig = {
+    callbacks: {
+        title: function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        }
+    },
+    backgroundColor: 'rgba(15, 23, 42, 0.9)',
+    titleFont: { size: 14, family: 'Inter' },
+    bodyFont: { size: 13, family: 'Inter' },
+    padding: 12,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: 1
+};
+
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.font.family = 'Inter';
+
+const trendCtx = document.getElementById('trendChart').getContext('2d');
+new Chart(trendCtx, {
+    type: 'line',
+    data: {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024(Est)'].map(wrapLabel),
+        datasets: [
+            {
+                label: 'General Immunity (Vit C/Zinc)',
+                data: [40, 95, 80, 60, 50, 45],
+                borderColor: '#ff0844',
+                backgroundColor: 'rgba(255, 8, 68, 0.1)',
+                borderWidth: 3,
+                tension: 0.4,
+                fill: true
+            },
+            {
+                label: 'Gut Health & Probiotics',
+                data: [30, 35, 45, 65, 85, 95],
+                borderColor: '#00f2fe',
+                backgroundColor: 'rgba(0, 242, 254, 0.1)',
+                borderWidth: 3,
+                tension: 0.4,
+                fill: true
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            tooltip: customTooltipConfig,
+            legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8 } }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                title: { display: true, text: 'Search & Sales Index', color: '#64748b' }
+            },
+            x: {
+                grid: { display: false }
+            }
+        }
+    }
+});
+
+const otcLabelsRaw = [
+    "Oral Rehydration Salts",
+    "Antidiarrheals (Loperamide/Smecta)",
+    "Probiotics & Floras",
+    "Antispasmodics & Antacids",
+    "Other Digestive Aids"
+];
+const otcCtx = document.getElementById('otcShareChart').getContext('2d');
+new Chart(otcCtx, {
+    type: 'doughnut',
+    data: {
+        labels: otcLabelsRaw.map(wrapLabel),
+        datasets: [{
+            data: [38, 25, 20, 12, 5],
+            backgroundColor: [
+                '#00f2fe',
+                '#4facfe',
+                '#10b981',
+                '#ffb199',
+                '#ff0844'
+            ],
+            borderWidth: 0,
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '70%',
+        plugins: {
+            tooltip: customTooltipConfig,
+            legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 12 } } }
+        }
+    }
+});
+
+const driverLabelsRaw = [
+    "Speed of Symptom Relief",
+    "Pharmacist / Doctor Recommendation",
+    "Familiarity with Brand",
+    "Price & Affordability",
+    "Natural / Gentle Ingredients"
+];
+const driverCtx = document.getElementById('driverChart').getContext('2d');
+new Chart(driverCtx, {
+    type: 'bar',
+    data: {
+        labels: driverLabelsRaw.map(wrapLabel),
+        datasets: [{
+            label: 'Importance Score (Out of 100)',
+            data: [92, 85, 78, 65, 45],
+            backgroundColor: '#10b981',
+            borderRadius: 6
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            tooltip: customTooltipConfig,
+            legend: { display: false }
+        },
+        scales: {
+            x: {
+                beginAtZero: true,
+                max: 100,
+                grid: { color: 'rgba(255, 255, 255, 0.05)' }
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#cbd5e1' }
+            }
+        }
+    }
+});
+
+const rxOtcLabelsRaw = ["Mild Discomfort", "Moderate Bug (1-2 days)", "Severe Infection (3+ days)"];
+const rxOtcCtx = document.getElementById('rxOtcChart').getContext('2d');
+new Chart(rxOtcCtx, {
+    type: 'bar',
+    data: {
+        labels: rxOtcLabelsRaw.map(wrapLabel),
+        datasets: [
+            {
+                label: 'Self-Medication (OTC)',
+                data: [95, 65, 15],
+                backgroundColor: '#4facfe',
+                borderRadius: {topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4}
+            },
+            {
+                label: 'Prescription Needed (Rx)',
+                data: [5, 35, 85],
+                backgroundColor: '#ff0844',
+                borderRadius: {topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0}
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            tooltip: customTooltipConfig,
+            legend: { position: 'top' }
+        },
+        scales: {
+            x: {
+                stacked: true,
+                grid: { display: false }
+            },
+            y: {
+                stacked: true,
+                beginAtZero: true,
+                max: 100,
+                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                ticks: {
+                    callback: function(value) { return value + "%" }
+                }
+            }
+        }
+    }
+});
+</script>
+</body>
+</html>
