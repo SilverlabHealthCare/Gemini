@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silverlab HealthCare | Sales Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002D72;
+            --secondary: #97D700;
+            --tertiary1: #00b2e3;
+            --tertiary2: #878CB4;
+            --tertiary3: #FF6A14;
+            --tertiary4: #80286C;
+            --tertiary5: #48a23f;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .bg-primary { background-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .border-primary { border-color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
+        .text-secondary { color: var(--secondary); }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center">
+                <img src="https://github.com/SilverlabHealthCare/Gemini/blob/main/Silverlablogo.png.png?raw=true" alt="Silverlab Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/200x60?text=Silverlab+Logo'">
+            </div>
+            <div class="text-right">
+                <h1 class="text-xl font-bold text-primary">Main Sales Performance</h1>
+                <p class="text-sm text-gray-500">Period: 2020 - 2025 (Projected)</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- KPI Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="card flex items-center space-x-4">
+                <div class="stat-icon bg-blue-50 text-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Total Units Sold</p>
+                    <h3 class="text-2xl font-bold text-primary">2,147,143</h3>
+                </div>
+            </div>
+
+            <div class="card flex items-center space-x-4 border-l-4 border-secondary">
+                <div class="stat-icon bg-green-50 text-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Total Revenue (RRP)</p>
+                    <h3 class="text-2xl font-bold text-primary">R297.4M</h3>
+                </div>
+            </div>
+
+            <div class="card flex items-center space-x-4">
+                <div class="stat-icon bg-orange-50 text-orange-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.642.321a6 6 0 01-3.86.517l-2.388-.477a2 2 0 00-1.022.547l-1.168 1.168a2 2 0 001.414 3.414h15.428a2 2 0 001.414-3.414l-1.168-1.168z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v13m0 0l-3-3m3 3l3-3" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Total Liters Produced</p>
+                    <h3 class="text-2xl font-bold text-primary">461,225</h3>
+                </div>
+            </div>
+
+            <div class="card flex items-center space-x-4">
+                <div class="stat-icon bg-purple-50 text-purple-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Avg Units / Month</p>
+                    <h3 class="text-2xl font-bold text-primary">29,974</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 1 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div class="card">
+                <h4 class="text-lg font-semibold text-primary mb-6">Units Sold by Year</h4>
+                <div class="chart-container">
+                    <canvas id="unitsByYearChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="text-lg font-semibold text-primary mb-6">Average Monthly Seasonality</h4>
+                <div class="chart-container">
+                    <canvas id="monthlyTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div class="card">
+                <h4 class="text-lg font-semibold text-primary mb-6">Top 10 Products (Units 2020-2025)</h4>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="topProductsUnitsChart"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="text-lg font-semibold text-primary mb-6">Top 10 Products (Volume in Liters)</h4>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="topProductsLitersChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Disclaimer -->
+        <div class="text-center text-gray-400 text-xs mt-8">
+            * Revenue calculated based on 2026 RRP values. 2025 figures represent projected totals.
+        </div>
+    </main>
+
+    <script>
+        // Color Palette
+        const colors = {
+            primary: '#002D72',
+            secondary: '#97D700',
+            tertiary: ['#00b2e3', '#878CB4', '#FF6A14', '#80286C', '#48a23f', '#792b8b']
+        };
+
+        // 1. Units Sold By Year Chart
+        new Chart(document.getElementById('unitsByYearChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025*'],
+                datasets: [{
+                    label: 'Units Sold',
+                    data: [319820, 432060, 304889, 320725, 375447, 394202],
+                    backgroundColor: colors.primary,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, grid: { display: false } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 2. Average Monthly Trend Chart
+        new Chart(document.getElementById('monthlyTrendChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Avg Units',
+                    data: [33624, 26868, 35575, 24677, 26376, 31409, 37664, 25855, 27355, 24401, 27156, 34875],
+                    borderColor: colors.secondary,
+                    backgroundColor: 'rgba(151, 215, 0, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointBackgroundColor: colors.secondary
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: '#f1f5f9' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 3. Top Products Units Chart
+        new Chart(document.getElementById('topProductsUnitsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Liquid 500ml Glass', 'Nasal Spray 25ml', 'Liquid 200ml Glass', 'Liquid 2.5L Refill', 'Nebulising Liquid 200ml', 'Healing Gel 75ml', 'Healing Cream 75ml', 'Mouthwash 500ml', 'Liquid 100ml Glass', 'Liquid 500ml PET'],
+                datasets: [{
+                    label: 'Total Units (6 Years)',
+                    data: [378880, 243981, 169344, 154623, 137456, 117845, 114567, 98342, 85672, 82341],
+                    backgroundColor: colors.tertiary,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // 4. Top Products Liters Chart
+        new Chart(document.getElementById('topProductsLitersChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Liquid 2.5L Refill', 'Liquid 500ml Glass', 'Mouthwash 500ml', 'Liquid 200ml Glass', 'Others'],
+                datasets: [{
+                    data: [386558, 189440, 49171, 33869, 50000],
+                    backgroundColor: [colors.primary, colors.secondary, ...colors.tertiary]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
